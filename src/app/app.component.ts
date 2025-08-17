@@ -2,17 +2,21 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { firebaseApp$ } from '@angular/fire/app';
-import { getDocs, updateDoc, doc } from 'firebase/firestore';
+import { getDocs, updateDoc, doc, deleteField } from 'firebase/firestore';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { AuthService } from './auth.service';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'webshop';
+  authservice = inject(AuthService);
   firestore = inject(Firestore);
 
   products = [
@@ -263,6 +267,17 @@ export class AppComponent {
     }
   ];
 
+  constructor() {
+    // this.addKeystoProduct();
+    this.getUserData();
+  }
+
+  async getUserData() {
+    await this.authservice.login();
+  }
+
+
+
   async logProducts() {
     const docRef = collection(this.firestore, "products")
     for (let index = 0; index < this.products.length; index++) {
@@ -275,15 +290,15 @@ export class AppComponent {
   async addKeystoProduct() {
     const docRef = collection(this.firestore, "products");
     const snapshot = await getDocs(docRef)
-    // for (let index = 0; index < snapshot.docs.length; index++) {
-    //   const docsnap = snapshot.docs[index];
-    //   const ref = doc(this.firestore, "products", docsnap.id)
-    //   await updateDoc(ref, {
-    //     imagePath:'',
-    //   });
+    for (let index = 0; index < snapshot.docs.length; index++) {
+      const docsnap = snapshot.docs[index];
+      const ref = doc(this.firestore, "products", docsnap.id)
+      await updateDoc(ref, {
+        // hier den neuen key eintragen -> keyname: keyvalue,
+      });
 
 
-    // }
+    }
     const products = snapshot.docs.map(docSnap => {
       return {
         id: docSnap.id,
@@ -295,8 +310,6 @@ export class AppComponent {
 
   }
 
-  constructor() {
-    // this.addKeystoProduct();
-  }
+
 
 }

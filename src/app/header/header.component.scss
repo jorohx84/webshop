@@ -1,0 +1,59 @@
+section {
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.headerContent {
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 77px;
+}
+
+.logo {
+    >img {
+        width: 185px;
+        height: 41px;
+    }
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 75px;
+
+    >a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+.headerBtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    >button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        >img {
+            width: 28px;
+            height: 28px;
+        }
+    }
+}

@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    font-family: 'Montserrat';
+}
+
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(./../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+:root {
+    --bg-color: #fff3e3;
+
+}
